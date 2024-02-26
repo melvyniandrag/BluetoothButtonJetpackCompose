@@ -1,18 +1,16 @@
 
 package com.ballofknives.bluetoothbuttonjetpackcompose.views
 
+import android.widget.Toast
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ballofknives.bluetoothbuttonjetpackcompose.models.domain.BluetoothDevice
 import com.ballofknives.bluetoothbuttonjetpackcompose.viewmodels.BluetoothUiState
 
 @Composable
@@ -21,7 +19,26 @@ fun ButtonScreen(
     onDisconnect: () -> Unit,
     onSendMessage: (String) -> Unit
 ) {
-    Text(
-        text = "Hello !"
-    )
+    val context = LocalContext.current
+    if(state.buttonIsClicked){
+        Column(Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Canvas(modifier = Modifier.size(80.dp).clickable(onClick = {
+                Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+            }), onDraw = {
+                drawCircle(color = Color.Red)
+            })
+
+        }
+    }
+    else{
+        Column(Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Canvas(modifier = Modifier.size(100.dp), onDraw = {
+                drawCircle(color = Color.Green)
+            })
+        }
+    }
 }

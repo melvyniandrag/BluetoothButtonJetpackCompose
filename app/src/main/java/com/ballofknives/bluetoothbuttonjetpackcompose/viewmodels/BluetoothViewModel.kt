@@ -93,11 +93,20 @@ class BluetoothViewModel (
     private fun Flow<ConnectionResult>.listen(): Job {
         return onEach { result ->
             when(result) {
-                ConnectionResult.ConnectionEstablished -> {
+                is ConnectionResult.ConnectionEstablishedByMe -> {
                     _state.update { it.copy(
                         isConnected = true,
                         isConnecting = false,
-                        errorMessage = null
+                        errorMessage = null,
+                        buttonIsClicked = true
+                    ) }
+                }
+                is ConnectionResult.ConnectionEstablishedByOtherDevice -> {
+                    _state.update { it.copy(
+                        isConnected = true,
+                        isConnecting = false,
+                        errorMessage = null,
+                        buttonIsClicked = false
                     ) }
                 }
                 is ConnectionResult.TransferSucceeded -> {

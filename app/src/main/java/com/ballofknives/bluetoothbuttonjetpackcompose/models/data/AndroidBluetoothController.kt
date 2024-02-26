@@ -128,7 +128,7 @@ class AndroidBluetoothController(
                     shouldLoop = false
                     null
                 }
-                emit(ConnectionResult.ConnectionEstablished)
+                emit(ConnectionResult.ConnectionEstablishedByOtherDevice)
                 currentClientSocket?.let {
                     currentServerSocket?.close()
                     val service = BluetoothDataTransferService(it)
@@ -164,7 +164,7 @@ class AndroidBluetoothController(
             currentClientSocket?.let { socket ->
                 try {
                     socket.connect()
-                    emit(ConnectionResult.ConnectionEstablished)
+                    emit(ConnectionResult.ConnectionEstablishedByMe)
 
                     BluetoothDataTransferService(socket).also {
                         dataTransferService = it
