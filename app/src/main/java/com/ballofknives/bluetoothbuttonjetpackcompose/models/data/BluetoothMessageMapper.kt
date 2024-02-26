@@ -2,16 +2,14 @@ package com.ballofknives.bluetoothbuttonjetpackcompose.models.data
 
 import com.ballofknives.bluetoothbuttonjetpackcompose.models.domain.BluetoothMessage
 
-fun String.toBluetoothMessage(isFromLocalUser: Boolean): BluetoothMessage {
-    val name = substringBeforeLast("#")
-    val message = substringAfter("#")
+fun Byte.toBluetoothMessage(isFromLocalUser: Boolean): BluetoothMessage {
     return BluetoothMessage(
-        message = message,
-        senderName = name,
+        message = this,
+        senderName = "name",
         isFromLocalUser = isFromLocalUser
     )
 }
 
 fun BluetoothMessage.toByteArray(): ByteArray {
-    return "$senderName#$message".encodeToByteArray()
+    return byteArrayOf(this.message)
 }

@@ -17,16 +17,14 @@ import com.ballofknives.bluetoothbuttonjetpackcompose.viewmodels.BluetoothUiStat
 fun ButtonScreen(
     state: BluetoothUiState,
     onDisconnect: () -> Unit,
-    onSendMessage: (String) -> Unit
+    onSendMessage: (Byte) -> Unit
 ) {
     val context = LocalContext.current
     if(state.buttonIsClicked){
         Column(Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Canvas(modifier = Modifier.size(80.dp).clickable(onClick = {
-                Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
-            }), onDraw = {
+            Canvas(modifier = Modifier.size(80.dp), onDraw = {
                 drawCircle(color = Color.Red)
             })
 
@@ -36,7 +34,9 @@ fun ButtonScreen(
         Column(Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Canvas(modifier = Modifier.size(100.dp), onDraw = {
+            Canvas(modifier = Modifier.size(100.dp).clickable(onClick = {
+                onSendMessage(0x01.toByte())
+            }), onDraw = {
                 drawCircle(color = Color.Green)
             })
         }

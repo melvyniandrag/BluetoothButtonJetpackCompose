@@ -71,12 +71,13 @@ class BluetoothViewModel (
             .listen()
     }
 
-    fun sendMessage(message: String) {
+    fun sendMessage(message: Byte) {
         viewModelScope.launch {
             val bluetoothMessage = bluetoothController.trySendMessage(message)
             if(bluetoothMessage != null) {
                 _state.update { it.copy(
-                    messages = it.messages + bluetoothMessage
+                    messages = it.messages + bluetoothMessage,
+                    buttonIsClicked = !it.buttonIsClicked
                 ) }
             }
         }
@@ -111,7 +112,8 @@ class BluetoothViewModel (
                 }
                 is ConnectionResult.TransferSucceeded -> {
                     _state.update { it.copy(
-                        messages = it.messages + result.message
+                        messages = it.messages + result.message,
+                        buttonIsClicked = !it.buttonIsClicked
                     ) }
                 }
                 is ConnectionResult.Error -> {

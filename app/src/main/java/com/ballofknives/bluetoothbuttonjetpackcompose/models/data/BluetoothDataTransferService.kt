@@ -28,9 +28,7 @@ class BluetoothDataTransferService(
                 }
 
                 emit(
-                    buffer.decodeToString(
-                        endIndex = byteCount
-                    ).toBluetoothMessage(
+                    buffer[0].toBluetoothMessage(
                         isFromLocalUser = false
                     )
                 )

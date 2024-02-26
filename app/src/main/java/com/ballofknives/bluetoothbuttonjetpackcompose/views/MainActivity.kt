@@ -129,8 +129,6 @@ class MainActivity : ComponentActivity() {
                             Log.i(TAG, state.toString())
                             DeviceScreen(
                                 state = state,
-                                onStartScan = viewModel::startScan,
-                                onStopScan = viewModel::stopScan,
                                 onDeviceClick = viewModel::connectToDevice,
                                 onStartServer = viewModel::waitForIncomingConnections
                             )
@@ -139,21 +137,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BluetoothButtonJetpackComposeTheme {
-        Greeting("Android")
     }
 }

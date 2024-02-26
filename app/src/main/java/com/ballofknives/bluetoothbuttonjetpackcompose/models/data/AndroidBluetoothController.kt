@@ -184,7 +184,7 @@ class AndroidBluetoothController(
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun trySendMessage(message: String): BluetoothMessage? {
+    override suspend fun trySendMessage(message: Byte): BluetoothMessage? {
         if(!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)) {
             return null
         }
@@ -234,6 +234,7 @@ class AndroidBluetoothController(
     }
 
     companion object {
-        const val SERVICE_UUID = "27b7d1da-08c7-4505-a6d1-2459987e5e2d"
+        //const val SERVICE_UUID = "27b7d1da-08c7-4505-a6d1-2459987e5e2d"
+        const val SERVICE_UUID = "00001111-0000-1000-8000-008805050500"
     }
 }
